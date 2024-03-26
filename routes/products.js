@@ -39,12 +39,13 @@ router.get('/add',authMiddleware, (req, res) => {
 
 
 router.get('/product/:id', async(req, res)=>{
-   
+    const id = req.params.id
+	const product = await Product.findById(id).populate('user').lean()
 
     res.render('product',{
-        product:product
+        product:product,
     })
-  
+   
 })
 
 router.get('/edit-product/:id', async(req, res)=>{
@@ -83,6 +84,12 @@ router.post('/edit-products/:id', async(req,res)=>{
 
    await Product.findByIdAndUpdate(id, req.body, {new: true})
     res.redirect('/products')
+})
+
+router.post('/delete-product/:id', async(req,res)=>{
+    const id = req.params.id
+    await Product.findByIdAndDelete(id)
+    res.redirect('/')
 })
 
 export default router

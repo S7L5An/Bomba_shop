@@ -20,12 +20,17 @@
                     <a type="button" class="btn btn-outline-primary " href='/product/{{_id}}'>Detail</a>
                     {{#if @root.token}}
 
-                      {{#ifequal user @root.userId}}  
+                    {{#ifequal user @root.userId}}
 
-                          <a type="button" class="btn btn-outline-secondary" href="/edit-product/{{_id}}">Edit</a>
-                          <button type="button" class="btn btn-outline-danger">Delete</button>
+                    <a type="button" class="btn btn-outline-secondary" href="/edit-product/{{_id}}">Edit</a>
 
-                      {{/ifequal}}
+                    <form action="/delete-product/{{_id}}" method="post" class="m-0 btn btn-outline-danger">
+
+                        <button type="sumbit" class="delete-btn">Delete</button>
+
+                    </form>
+
+                    {{/ifequal}}
 
                     {{/if}}
 
@@ -38,5 +43,19 @@
     {{/each}}
 </div>
 {{else}}
-<p>No product</p>
+<section class='page_404 w-75 mx-auto'>
+		<div class='row'>
+			<div class='col-sm-12'>
+				<div class='col-sm-10 col-sm-offset-1 text-center'>
+					<div class='four_zero_four_bg'>
+						<h1 class='text-center'>404</h1>
+					</div>
+					<div class='contant_box_404'>
+						<h3 class='h2'>Add new products</h3>
+						<a href='/add' class='btn btn-primary btn-lg mb-5'>Add products</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>    
 {{/if}}
